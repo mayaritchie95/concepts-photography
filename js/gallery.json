@@ -1,0 +1,11 @@
+{
+  "_instructions": "To change the large homepage images, edit this list. Each item needs an image file placed in /images and a short caption. Keep 5-7 items for best results. Order here = order on the site.",
+  "slides": [
+    { "src": "images/hero-1.jpg", "caption": "Portrait" },
+    { "src": "images/hero-2.jpg", "caption": "Portrait" },
+    { "src": "images/hero-3.jpg", "caption": "Portrait" },
+    { "src": "images/hero-4.jpg", "caption": "Portrait" },
+    { "src": "images/hero-5.jpg", "caption": "Portrait" },
+    { "src": "images/hero-6.jpg", "caption": "Portrait" }
+  ]
+}
