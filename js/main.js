@@ -148,6 +148,17 @@
   start();
 })();
 
+/* ---- Gallery login (mock) ---- */
+(function () {
+  var form = document.getElementById('gallery-form');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('gallery-status');
+    if (status) status.textContent = 'This is a preview. Secure client galleries will be connected before launch — for now, email Karee for your images.';
+  });
+})();
+
 /* ---- Year ---- */
 (function () {
   Array.prototype.forEach.call(document.querySelectorAll('.year'), function (el) {

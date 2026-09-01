@@ -84,11 +84,19 @@ p { margin: 0 0 1.15em; max-width: 62ch; }
   border-bottom: 1px solid var(--hairline);
 }
 .site-header .wrap-wide {
-  display: flex; align-items: baseline; justify-content: space-between;
-  padding-top: 22px; padding-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 16px; padding-bottom: 16px;
 }
-.wordmark { font-family: var(--sans); font-size: 0.95rem; letter-spacing: 0.34em; text-transform: uppercase; font-weight: 600; line-height: 1; }
-.wordmark small { display:block; font-size: 0.56rem; letter-spacing: 0.3em; color: var(--grey); font-weight: 400; margin-top: 6px; }
+.wordmark { font-family: var(--sans); display: inline-flex; align-items: center; gap: 14px; line-height: 1; }
+.logo-mark { height: 38px; width: auto; display: block; }
+.logo-type { display: flex; flex-direction: column; font-size: 0.95rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; color: var(--ink); }
+.logo-type small { font-size: 0.52rem; letter-spacing: 0.26em; color: var(--grey); font-weight: 400; margin-top: 5px; }
+@media (max-width: 860px) {
+  .logo-mark { height: 32px; }
+  .logo-type { font-size: 0.82rem; letter-spacing: 0.26em; }
+  .logo-type small { font-size: 0.46rem; }
+}
+@media (max-width: 420px) { .logo-type { display: none; } }
 
 .nav { display: flex; gap: 40px; align-items: baseline; }
 .nav a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); position: relative; padding-bottom: 3px; }
@@ -110,26 +118,32 @@ p { margin: 0 0 1.15em; max-width: 62ch; }
   .nav a { width: 100%; padding: 18px var(--gutter); font-size: 0.95rem; border-bottom: 1px solid var(--hairline); }
 }
 
-/* ---------- HERO: split editorial ---------- */
+/* ---------- HERO: split editorial, square image ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  min-height: calc(100vh - 74px);
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   border-bottom: 1px solid var(--hairline-strong);
 }
 .hero-text {
-  padding: clamp(30px, 6vw, 90px) clamp(22px, 4vw, 60px) clamp(30px, 6vw, 70px) var(--gutter);
-  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(30px, 5vw, 80px) clamp(22px, 4vw, 60px) clamp(30px, 5vw, 70px) var(--gutter);
+  display: flex; flex-direction: column; justify-content: center;
   position: relative;
 }
-.hero-text .kicker { display:flex; align-items:center; gap: 16px; }
+.hero-text .kicker { display:flex; align-items:center; gap: 16px; margin-bottom: clamp(24px,4vh,48px); }
 .hero-text .kicker::after { content:""; flex:1; height:1px; background: var(--hairline); }
-.hero-headline { margin: clamp(28px, 6vh, 70px) 0 auto; }
-.hero-headline h1 { font-size: clamp(3rem, 8.5vw, 7.2rem); }
-.hero-meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
-.hero-meta p { margin: 0; max-width: 34ch; color: var(--ink); }
+.hero-headline { margin: 0 0 clamp(30px,5vh,56px); }
+.hero-headline h1 { font-size: clamp(2.4rem, 5.2vw, 5rem); }
+.hero-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.hero-meta p { margin: 0; max-width: 40ch; color: var(--ink); }
 
-.hero-frame { position: relative; overflow: hidden; background: var(--wash); border-left: 1px solid var(--hairline-strong); }
+.hero-frame {
+  position: relative; overflow: hidden; background: var(--wash);
+  border-left: 1px solid var(--hairline-strong);
+  aspect-ratio: 1 / 1;
+  align-self: center;
+  width: 100%;
+}
 .hero-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
 .hero-track::-webkit-scrollbar { display: none; }
 .hero-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
@@ -146,8 +160,8 @@ p { margin: 0 0 1.15em; max-width: 62ch; }
 .frame-foot .count button:hover { opacity: 1; }
 
 @media (max-width: 860px) {
-  .hero { grid-template-columns: 1fr; min-height: 0; }
-  .hero-frame { border-left: 0; border-top: 1px solid var(--hairline-strong); order: 2; height: 68vh; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-frame { border-left: 0; border-top: 1px solid var(--hairline-strong); order: 2; aspect-ratio: 1 / 1; }
   .hero-text { order: 1; padding: 40px var(--gutter) 48px; }
   .hero-headline { margin: 28px 0 36px; }
 }
@@ -300,4 +314,40 @@ form .btn-solid { margin-top: 32px; }
   /* On mobile, show both pages stacked (no absolute overlap) so nothing is cut off */
   .rot-page { opacity: 1; visibility: visible; transform: none; }
   .rot-dots { display: none; }
+}
+
+/* Full-bleed image bands — give the photography visual presence between text sections */
+.band {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--wash);
+}
+.band img {
+  width: 100%;
+  height: clamp(340px, 52vh, 620px);
+  object-fit: cover;
+  display: block;
+}
+/* A band that sits flush between sections (no vertical section padding around it) */
+.band + section, section + .band { }
+.band.tall img { height: clamp(420px, 68vh, 760px); }
+@media (max-width: 860px) {
+  .band img { height: clamp(260px, 42vh, 420px); }
+  .band.tall img { height: clamp(320px, 52vh, 500px); }
+}
+
+/* Portfolio section sub-nav */
+.section-nav { display:flex; flex-wrap:wrap; gap: 8px 28px; margin-top: 28px; }
+.section-nav a { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); padding-bottom: 3px; border-bottom: 1px solid transparent; }
+.section-nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.pf-section { padding: clamp(56px,8vw,110px) 0; scroll-margin-top: 90px; }
+.pf-section + .pf-section { padding-top: 0; }
+
+/* Gallery login */
+.gallery-login { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,90px); align-items:center; }
+.gallery-form-wrap { border-left: 1px solid var(--hairline); padding-left: clamp(30px,5vw,70px); }
+@media (max-width: 860px) {
+  .gallery-login { grid-template-columns: 1fr; gap: 44px; }
+  .gallery-form-wrap { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: 40px; }
 }

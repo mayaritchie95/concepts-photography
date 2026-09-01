@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /gallery.html
 Disallow: /privacy.html
 Disallow: /terms.html
 

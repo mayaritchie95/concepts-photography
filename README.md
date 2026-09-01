@@ -1,50 +1,40 @@
-# Concepts Photography & Design Inc. — Website
+# CONCEPTS Photography & Design Inc. — Website
 
-Clean, minimal, image-focused static website. No database or server code required — it runs on any static host (including whatever PagePros sets up when the domain moves over from FolioLink).
+Clean, minimal, image-focused static website. Runs on any static host.
 
-## Pages
-- `index.html` — Home, with the large swipeable hero gallery
-- `headshots.html` — Headshots service page (your primary service to promote; SEO-optimized)
-- `portfolio.html` — Portfolio grid
-- `about.html` — About Karee
-- `contact.html` — Contact page with inquiry form
-- `privacy.html` / `terms.html` — Legal pages
+## Pages (3-page structure + supporting pages)
+- `index.html` — Home / landing page (square hero gallery, image bands, testimonials)
+- `portfolio.html` — Portfolio, with five sections: Headshots, Character Portraits, Industry Specific, Commercial Contracts, Personal
+- `gallery.html` — Private client gallery sign-in (preview mockup — secure galleries to be connected before launch)
+- `behind-the-camera.html` — Karee's bio and client reviews
+- `contact.html` — Contact form (reached from buttons and footer)
+- `privacy.html` / `terms.html` — Legal
 - `404.html` — Error page
-- `sitemap.xml`, `robots.txt` — SEO files
+- `about.html`, `headshots.html` — redirects to the new pages (kept so old links still work)
 
-## Updating the large homepage gallery (the 5–7 big images)
-This is designed so you can change it whenever you like:
+## Changing the homepage quote (and its size)
+Open `index.html` and find the block marked:
+`<!-- EDIT THE HOMEPAGE QUOTE HERE. -->`
+- Change the words between the `<h1>...</h1>` tags.
+- Wrap a word in `<em>...</em>` to italicize it (like "spirit").
+- To change the size, edit the number `5rem` in that line. Bigger number = bigger text. Try between `3rem` and `6rem`.
 
-1. Put your new image files in the `images/` folder (JPGs work best, roughly 1600×1000px or larger).
-2. Open `js/gallery.json` in any text editor.
-3. Edit the list — one entry per image, with the file name and a short caption. Keep it to 5–7 for the best look. The order in the file is the order on the site.
-4. Save. Done — no code changes needed.
+## Changing the big quotes throughout the site
+The large serif quotes are the client reviews and "kind words." To change them:
+- **Homepage review quotes:** in `index.html`, look for `class="pullquote"` — edit the text inside each `<blockquote>`.
+- **Rotating short quotes (homepage):** in `index.html`, look for `id="kind-rotator"` — each `<blockquote>` is one quote; the `<cite>` is the name.
+- **Behind the Camera reviews:** in `behind-the-camera.html`, same pattern.
+You can freely swap the wording and names any time.
 
-Example entry:
-```
-{ "src": "images/my-new-photo.jpg", "caption": "Executive headshot — Calgary" }
-```
+## Updating the large homepage hero images (square)
+Edit `js/gallery.json` — one entry per image with the file name and a short caption. Keep 5–7. Images are shown square, so square-ish source photos crop best.
 
-## Replacing the other images
-All placeholder images are grey boxes labelled with what they are. Replace the files in `images/` with your real photos, keeping the same file names (e.g. `portrait-karee.jpg`, `work-1.jpg`, `headshot-feature.jpg`). Portfolio and portrait images look best in a tall (3:4) crop.
-
-## Content
-Text throughout is placeholder/draft, ready to be swapped for content copied from your existing website (kareedavidsonphotography.com / conceptsphoto.ca). Testimonials are marked to be replaced with your real reviews.
-
-## Contact form
-The form opens the visitor's email app pre-filled and addressed to kareedavidson@sasktel.net, so leads land in your inbox with no server needed. If PagePros later wants a form that sends automatically without opening an email app, that's a small add-on they can wire up.
+## Contact / leads
+The contact form and "email Karee" buttons open the visitor's email app addressed to kareedavidson@sasktel.net. The gallery sign-in is a preview; a secure client-gallery service can be connected before launch.
 
 ## Before launch — checklist
-- [ ] Replace all placeholder images with real photos
-- [ ] Paste real content from the existing site
-- [ ] Add real social media links (search for `href="#"` in the files)
-- [ ] Confirm the domain (`conceptsphoto.ca`) in the SEO tags is the one you'll use; update if different
-- [ ] Have the Privacy Policy and Terms of Use reviewed by a professional (they're solid templates but not legal advice)
-- [ ] Give Codie (PagePros) the keyword/city targets so they can fine-tune the meta tags and headings
-
-## SEO already built in
-- Descriptive page titles and meta descriptions on every page
-- Local business + service structured data (schema.org) for Google
-- Saskatoon & Calgary named throughout, with both studio addresses
-- Open Graph tags for nice link previews on social
-- Sitemap and robots file
+- [ ] Replace any remaining placeholder text with final content
+- [ ] Confirm portfolio images are grouped the way you want across the five sections
+- [ ] Connect a real client-gallery service to `gallery.html`
+- [ ] Have Privacy Policy and Terms reviewed by a professional
+- [ ] Give Codie (PagePros) the keyword/city targets to fine-tune SEO
