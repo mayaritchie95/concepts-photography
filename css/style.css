@@ -122,7 +122,7 @@ p { margin: 0 0 1.15em; max-width: 62ch; }
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: stretch;
+  align-items: start;
   border-bottom: 1px solid var(--hairline-strong);
 }
 .hero-text {
@@ -139,9 +139,8 @@ p { margin: 0 0 1.15em; max-width: 62ch; }
 
 .hero-frame {
   position: relative; overflow: hidden; background: var(--wash);
-  border-left: 1px solid var(--hairline-strong);
   aspect-ratio: 1 / 1;
-  align-self: center;
+  align-self: start;
   width: 100%;
 }
 .hero-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
@@ -192,14 +191,21 @@ section { padding: clamp(64px, 11vw, 150px) 0; }
   .svc-row p { grid-column: 2; margin-top: 10px; }
 }
 
-.folio { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(8px, 1.4vw, 20px); }
-.folio a { display:block; overflow:hidden; background: var(--wash); }
-.folio img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.6,.2,1); }
+.folio {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: clamp(150px, 19vw, 260px);
+  gap: clamp(8px, 1.4vw, 20px);
+  grid-auto-flow: dense;
+}
+.folio a { display:block; overflow:hidden; background: var(--wash); position: relative; }
+.folio a > img { position:absolute; inset:0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.6,.2,1); }
 .folio a:hover img { transform: scale(1.04); }
-.folio .tall { grid-column: span 4; aspect-ratio: 3/4; }
-.folio .wide { grid-column: span 8; aspect-ratio: 8/5; }
-.folio .half { grid-column: span 6; aspect-ratio: 1/1; }
-.folio .third { grid-column: span 4; aspect-ratio: 3/4; }
+/* Column span + row span decide the shape; items always fill their cell (no gaps) */
+.folio .tall  { grid-column: span 4; grid-row: span 3; }
+.folio .wide  { grid-column: span 8; grid-row: span 3; }
+.folio .half  { grid-column: span 6; grid-row: span 3; }
+.folio .third { grid-column: span 4; grid-row: span 3; }
 @media (max-width: 860px) {
   .folio { grid-template-columns: repeat(2,1fr); }
   .folio .tall, .folio .half, .folio .third { grid-column: span 1; aspect-ratio: 3/4; }

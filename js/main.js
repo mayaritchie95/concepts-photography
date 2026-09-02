@@ -159,6 +159,29 @@
   });
 })();
 
+/* ---- Client gallery image protection ----
+   Disables right-click (context menu), image dragging, and long-press save
+   on pages marked <body data-protect="gallery">. This deters casual saving of
+   client images. Note: no web protection is absolute, but this covers the
+   common ways people grab images. */
+(function () {
+  if (document.body.getAttribute('data-protect') !== 'gallery') return;
+
+  document.addEventListener('contextmenu', function (e) {
+    // Block the right-click menu on images (and everywhere on the gallery, to be safe)
+    e.preventDefault();
+  });
+  document.addEventListener('dragstart', function (e) {
+    if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+  });
+  // Discourage long-press "save image" on touch devices
+  document.querySelectorAll('img').forEach(function (img) {
+    img.setAttribute('draggable', 'false');
+    img.style.webkitTouchCallout = 'none';
+    img.style.userSelect = 'none';
+  });
+})();
+
 /* ---- Year ---- */
 (function () {
   Array.prototype.forEach.call(document.querySelectorAll('.year'), function (el) {
