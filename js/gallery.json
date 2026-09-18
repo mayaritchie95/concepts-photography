@@ -5,10 +5,6 @@
     { "src": "images/hero-2.jpg", "caption": "Portrait" },
     { "src": "images/hero-3.jpg", "caption": "Portrait" },
     { "src": "images/hero-4.jpg", "caption": "Portrait" },
-    { "src": "images/hero-5.jpg", "caption": "Portrait" },
-    { "src": "images/hero-6.jpg", "caption": "Portrait" },
-    { "src": "images/hero-7.jpg", "caption": "Portrait" },
-    { "src": "images/hero-8.jpg", "caption": "Portrait" },
-    { "src": "images/hero-9.jpg", "caption": "Portrait" }
+    { "src": "images/hero-5.jpg", "caption": "Portrait" }
   ]
 }
