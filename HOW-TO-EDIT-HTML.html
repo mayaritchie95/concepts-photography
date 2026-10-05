@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Edit Your Website Text — CONCEPTS Photography &amp; Design</title>
+<style>
+  :root{
+    --ink:#0a0a0a; --grey:#6e6e6e; --hairline:#dcdcdc; --wash:#f5f5f5; --paper:#fff;
+    --serif:"Georgia","Times New Roman",serif; --sans:"Helvetica Neue","Arial",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px;margin:0 auto;padding:clamp(28px,6vw,80px) clamp(20px,5vw,40px);}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,5vw,3rem);line-height:1.1;letter-spacing:-0.02em;margin:0 0 .2em;}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.15;letter-spacing:-0.01em;margin:2.2em 0 .5em;padding-top:1.4em;border-top:1px solid var(--hairline);}
+  h3{font-size:1.05rem;letter-spacing:0.02em;margin:1.8em 0 .4em;}
+  .label{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey);font-weight:500;display:block;margin-bottom:14px;}
+  p,li{max-width:68ch;}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:0.9em;background:var(--wash);padding:2px 6px;border-radius:3px;color:#b5302a;}
+  pre{background:#0a0a0a;color:#eaeaea;padding:18px 20px;border-radius:6px;overflow-x:auto;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:0.86rem;line-height:1.55;}
+  pre .hl{color:#ffd479;}
+  pre .dim{color:#888;}
+  .callout{background:var(--wash);border-left:3px solid var(--ink);padding:16px 20px;margin:1.5em 0;border-radius:0 4px 4px 0;}
+  .callout.warn{border-left-color:#b5302a;}
+  .callout strong{display:block;margin-bottom:4px;}
+  table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:0.95rem;}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--hairline);vertical-align:top;}
+  th{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);font-weight:500;}
+  .step{display:grid;grid-template-columns:36px 1fr;gap:16px;margin:1.4em 0;align-items:start;}
+  .step .n{font-family:var(--serif);font-size:1.3rem;color:var(--grey);line-height:1;padding-top:2px;}
+  .lead{font-size:1.15rem;line-height:1.5;color:var(--ink);}
+  .foot{margin-top:3em;padding-top:1.5em;border-top:1px solid var(--hairline);color:var(--grey);font-size:0.9rem;}
+  a{color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="label">CONCEPTS Photography &amp; Design</span>
+  <h1>How to edit your website text</h1>
+  <p class="lead">A plain-language guide to changing the words on your site by hand &mdash; and what a CMS would add if you&rsquo;d rather not touch any code. No experience needed.</p>
+
+  <div class="callout">
+    <strong>First, the big picture</strong>
+    Your website is made of files. Changing text means opening a file, finding the words, and typing over them &mdash; the same as editing a letter in a word processor, except the words sit between little code &ldquo;tags.&rdquo; You only ever change the words, never the tags. Always keep a backup copy of a file before you edit it, so you can undo.
+  </div>
+
+  <h2>Part 1 &mdash; Editing the text yourself</h2>
+
+  <h3>What you&rsquo;ll need</h3>
+  <p>Any plain-text editor. On a Mac, <strong>TextEdit</strong> works (open it, then choose Format &rarr; Make Plain Text). On Windows, <strong>Notepad</strong> works. Better free options that colour-code the tags and make it much easier are <strong>Visual Studio Code</strong> or <strong>Sublime Text</strong> &mdash; worth installing if you&rsquo;ll edit often.</p>
+
+  <h3>Which file is which page</h3>
+  <table>
+    <tr><th>To edit this page</th><th>Open this file</th></tr>
+    <tr><td>Home</td><td><code>index.html</code></td></tr>
+    <tr><td>Portfolio</td><td><code>portfolio.html</code></td></tr>
+    <tr><td>Client Gallery</td><td><code>gallery.html</code></td></tr>
+    <tr><td>Offerings</td><td><code>offerings.html</code></td></tr>
+    <tr><td>Behind the Camera</td><td><code>behind-the-camera.html</code></td></tr>
+    <tr><td>Contact</td><td><code>contact.html</code></td></tr>
+  </table>
+
+  <h3>The one rule</h3>
+  <p>Change only the words <em>between</em> the <code>&gt;</code> and <code>&lt;</code> symbols. Leave everything that looks like <code>&lt;p&gt;</code> or <code>&lt;h1&gt;</code> alone. For example, here is a line from your site:</p>
+  <pre>&lt;p class="lead"&gt;<span class="hl">Karee Davidson &mdash; a Canadian portrait photographer.</span>&lt;/p&gt;</pre>
+  <p>You would change only the highlighted words. Keep the <code>&lt;p class="lead"&gt;</code> at the start and the <code>&lt;/p&gt;</code> at the end exactly as they are.</p>
+
+  <h3>Step by step</h3>
+  <div class="step"><div class="n">1</div><div><strong>Make a backup.</strong> Copy the file first (e.g. duplicate <code>index.html</code> and name it <code>index-BACKUP.html</code>). If anything goes wrong, you can put the backup back.</div></div>
+  <div class="step"><div class="n">2</div><div><strong>Open the file</strong> in your text editor.</div></div>
+  <div class="step"><div class="n">3</div><div><strong>Find your words.</strong> Use Edit &rarr; Find (Cmd+F / Ctrl+F) and search for a few words you want to change. That jumps you straight to the spot.</div></div>
+  <div class="step"><div class="n">4</div><div><strong>Type your change,</strong> touching only the words between the tags.</div></div>
+  <div class="step"><div class="n">5</div><div><strong>Save</strong> (Cmd+S / Ctrl+S). If using TextEdit, make sure it saves as plain text with the <code>.html</code> ending, not <code>.txt</code>.</div></div>
+  <div class="step"><div class="n">6</div><div><strong>Check it.</strong> Double-click the file to open it in your web browser and confirm it looks right before it goes live.</div></div>
+  <div class="step"><div class="n">7</div><div><strong>Upload it</strong> to your host (or send it to PagePros to put live).</div></div>
+
+  <h3>Changing the size of a big heading</h3>
+  <p>Some headings have a size setting that looks like this:</p>
+  <pre>style="font-size: clamp(2.4rem, 5.2vw, <span class="hl">5rem</span>);"</pre>
+  <p>Change only the <strong>last number</strong> (here, <code>5rem</code>). Bigger number = bigger text; smaller = smaller. Try values between <code>3rem</code> and <code>6rem</code>. The first two numbers control the size on phones &mdash; leave them be.</p>
+
+  <h3>A few things that will save you grief</h3>
+  <ul>
+    <li>Curly &ldquo;smart quotes&rdquo; are fine in your words. Just don&rsquo;t delete the straight quotes <code>"</code> that are part of the tags.</li>
+    <li>If you want an &amp; symbol in your text, type <code>&amp;amp;</code> &mdash; that&rsquo;s how the site shows an ampersand.</li>
+    <li>Don&rsquo;t delete a <code>&lt;/p&gt;</code>, <code>&lt;/h1&gt;</code> or similar closing tag. If a chunk of the page suddenly looks broken, a missing closing tag is almost always why &mdash; restore your backup and try again.</li>
+    <li>When in doubt, change one small thing, save, and check it in the browser before moving on.</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>What hand-editing can&rsquo;t do</strong>
+    Adding or removing whole photos, changing the layout, or connecting the real client galleries are developer tasks, not text edits. For those, talk to PagePros.
+  </div>
+
+  <h2>Part 2 &mdash; Editing without any code (a CMS)</h2>
+  <p>If editing files sounds like more than you want to take on, the alternative is a <strong>CMS</strong> (content management system). A CMS adds a private login to your site. You sign in, see your text in simple boxes, type your changes, and click save &mdash; no files, no tags, no code. The site&rsquo;s design stays exactly as it is now.</p>
+
+  <p>This is a setup task for your web person (PagePros), not something that lives in these files. For a hand-built site like yours, common options are:</p>
+  <table>
+    <tr><th>Option</th><th>What it is</th><th>Cost</th></tr>
+    <tr><td>Decap CMS</td><td>Free editing login added to your existing site. Keeps this exact design.</td><td>Free</td></tr>
+    <tr><td>CloudCannon</td><td>Lets you edit text visually, right on the page. Very friendly.</td><td>Monthly fee</td></tr>
+    <tr><td>Sanity / Contentful</td><td>Professional content tools. More power than you likely need.</td><td>Free tier / monthly</td></tr>
+  </table>
+
+  <h3>What to ask PagePros</h3>
+  <div class="callout">
+    &ldquo;I&rsquo;d like to edit the text on my pages myself, through a login, <em>without rebuilding the site</em>. Can you connect something like Decap CMS to it? Which text sections can you make editable, and roughly what&rsquo;s involved?&rdquo;
+  </div>
+  <p>That gives them a clear, answerable question. The key phrase is &ldquo;without rebuilding&rdquo; &mdash; you want to keep the site you have, just add an easy way to edit the words.</p>
+
+  <p class="foot">Prepared for Karee Davidson &middot; CONCEPTS Photography &amp; Design Inc. &mdash; This guide covers your site&rsquo;s pages: Home, Portfolio, Client Gallery, Offerings, Behind the Camera, and Contact.</p>
+
+</div>
+</body>
+</html>
