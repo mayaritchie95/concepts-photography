@@ -427,3 +427,12 @@ form .btn-solid { margin-top: 32px; }
 /* Portfolio section descriptions (under each header) */
 .section-desc { max-width: 60ch; color: var(--grey); font-size: 1rem; line-height: 1.55; margin: -8px 0 clamp(30px,4vw,48px); }
 @media (max-width: 860px){ .section-desc { margin-top: 4px; } }
+
+/* Portfolio intro statement (Todorov) */
+.pf-intro { padding: clamp(40px,6vw,72px) 0 clamp(8px,2vw,20px); }
+.pf-intro .wrap { max-width: 1360px; }
+.pf-intro-inner { display:grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,60px); align-items: start; }
+.pf-intro .label { padding-top: 6px; }
+.pf-intro p { max-width: 72ch; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.6; color: #2a2a2a; margin: 0; }
+.pf-intro cite { display:block; margin-top: 16px; font-style: normal; font-size: 0.82rem; letter-spacing: 0.08em; color: var(--grey); }
+@media (max-width: 860px){ .pf-intro-inner { grid-template-columns: 1fr; gap: 14px; } }
