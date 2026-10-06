@@ -406,3 +406,24 @@ form .btn-solid { margin-top: 32px; }
 .offer-meta { font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); margin-bottom: 18px; }
 .offer-cta { margin-top: clamp(22px,3vw,32px); }
 @media (max-width: 860px){ .offer-head{ grid-template-columns: 1fr; gap:10px; } .offer-body{ grid-template-columns:1fr; } .offer-head .index-num{ padding-top:0; } }
+
+/* Portfolio image captions (client names) — fade in on hover */
+.folio a { position: relative; }
+.folio-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 14px 16px;
+  font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+  opacity: 0; transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.folio a:hover .folio-cap { opacity: 1; }
+/* Touch devices can't hover — show caption subtly, always */
+@media (hover: none) {
+  .folio-cap { opacity: 1; font-size: 0.68rem; padding: 10px 12px; }
+}
+
+/* Portfolio section descriptions (under each header) */
+.section-desc { max-width: 60ch; color: var(--grey); font-size: 1rem; line-height: 1.55; margin: -8px 0 clamp(30px,4vw,48px); }
+@media (max-width: 860px){ .section-desc { margin-top: 4px; } }
