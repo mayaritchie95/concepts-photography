@@ -177,102 +177,47 @@
   start();
 })();
 
-/* ---- Client gallery: login -> view-only gallery + lightbox (demo) ----
-   NOTE: this is a front-end demo. The access code is checked in the browser,
-   which is fine for a preview but is NOT real security — a secure, per-client
-   gallery service is connected before launch. */
+/* ---- Client gallery: send client to their Pixieset gallery ----
+   The client types their gallery name (and password). We build their Pixieset
+   gallery URL from the name and send them there. Pixieset confirms the password
+   and shows their private, view-only images. Karee manages all galleries in
+   Pixieset — no website changes needed per client. */
 (function () {
   var form = document.getElementById('gallery-form');
   if (!form) return;
 
-  // Demo galleries: code -> { name, count }. Images live in images/gallery-demo/proof-NN.jpg
-  var DEMO = {
-    'SMITH2027': { name: 'Smith Leadership Team', count: 12 }
-  };
+  // Karee's Pixieset base. A gallery named "kristajflint" lives at BASE + "kristajflint/".
+  var PIXIESET_BASE = 'https://conceptsphotographydesigninc.pixieset.com/';
 
-  var loginSection = document.getElementById('gallery-login-section');
-  var viewSection  = document.getElementById('gallery-view');
-  var grid         = document.getElementById('proof-grid');
-  var clientNameEl = document.getElementById('gallery-client-name');
-  var status       = document.getElementById('gallery-status');
-  var signout      = document.getElementById('gallery-signout');
-
-  function pad(n){ return (n < 10 ? '0' : '') + n; }
-
-  function openGallery(gal) {
-    clientNameEl.textContent = gal.name;
-    grid.innerHTML = '';
-    for (var i = 1; i <= gal.count; i++) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'proof-cell';
-      btn.setAttribute('data-index', i);
-      var img = document.createElement('img');
-      img.src = 'images/gallery-demo/proof-' + pad(i) + '.jpg';
-      img.alt = gal.name + ' — proof ' + i;
-      img.setAttribute('draggable', 'false');
-      img.loading = 'lazy';
-      var num = document.createElement('span');
-      num.className = 'pnum';
-      num.textContent = pad(i);
-      btn.appendChild(img);
-      btn.appendChild(num);
-      btn.addEventListener('click', (function (idx) { return function () { openLightbox(idx, gal.count); }; })(i));
-      grid.appendChild(btn);
-    }
-    loginSection.hidden = true;
-    viewSection.hidden = false;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  var status = document.getElementById('gallery-status');
+  var btn = form.querySelector('button[type="submit"]');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var code = (form.elements['gallery-code'].value || '').trim().toUpperCase();
-    var gal = DEMO[code];
-    if (gal) {
-      if (status) status.textContent = '';
-      openGallery(gal);
-    } else {
-      if (status) status.textContent = "That code isn't right. Check the code from your email, or get in touch and Karee will resend it.";
+    var raw = (form.elements['gallery-name'].value || '').trim();
+
+    if (!raw) {
+      if (status) status.textContent = 'Please enter your gallery name (it\'s in your email).';
+      form.elements['gallery-name'].focus();
+      return;
     }
-  });
 
-  if (signout) signout.addEventListener('click', function () {
-    viewSection.hidden = true;
-    loginSection.hidden = false;
-    form.reset();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+    // Turn what they typed into a clean URL slug: lowercase, spaces -> nothing,
+    // strip anything that isn't a letter/number/hyphen, drop stray slashes.
+    var slug = raw.toLowerCase()
+      .replace(/\s+/g, '')
+      .replace(/[^a-z0-9-]/g, '');
 
-  /* ---- Lightbox ---- */
-  var lb = document.getElementById('lightbox');
-  if (!lb) return;
-  var lbImg = document.getElementById('lb-img');
-  var lbNum = lb.querySelector('.lb-num');
-  var cur = 1, total = 0;
+    if (!slug) {
+      if (status) status.textContent = 'That gallery name doesn\'t look right. Please check your email and try again.';
+      return;
+    }
 
-  function show(i) {
-    cur = i;
-    lbImg.src = 'images/gallery-demo/proof-' + pad(i) + '.jpg';
-    lbNum.textContent = pad(i) + ' / ' + pad(total);
-  }
-  function openLightbox(i, count) {
-    total = count; show(i); lb.hidden = false;
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() { lb.hidden = true; document.body.style.overflow = ''; }
-  function next() { show(cur % total + 1); }
-  function prev() { show((cur - 2 + total) % total + 1); }
+    if (status) status.textContent = 'Taking you to your gallery\u2026';
+    if (btn) { btn.disabled = true; btn.textContent = 'Opening\u2026'; }
 
-  lb.querySelector('.lb-close').addEventListener('click', closeLightbox);
-  lb.querySelector('.lb-next').addEventListener('click', next);
-  lb.querySelector('.lb-prev').addEventListener('click', prev);
-  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
-  document.addEventListener('keydown', function (e) {
-    if (lb.hidden) return;
-    if (e.key === 'Escape') closeLightbox();
-    else if (e.key === 'ArrowRight') next();
-    else if (e.key === 'ArrowLeft') prev();
+    // Send them to their Pixieset gallery (Pixieset will confirm the password).
+    window.location.href = PIXIESET_BASE + slug + '/';
   });
 })();
 
