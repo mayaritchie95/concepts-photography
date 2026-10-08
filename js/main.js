@@ -191,32 +191,51 @@
 
   var status = document.getElementById('gallery-status');
   var btn = form.querySelector('button[type="submit"]');
+  var nameField = form.elements['gallery-name'];
+  var confirmed = false;
+
+  function slugify(raw) {
+    return raw.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '');
+  }
+
+  // If they edit the name after a confirm prompt, reset back to step one.
+  nameField.addEventListener('input', function () {
+    if (confirmed) {
+      confirmed = false;
+      if (status) status.textContent = '';
+      if (btn) btn.textContent = 'View my gallery';
+    }
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var raw = (form.elements['gallery-name'].value || '').trim();
+    var raw = (nameField.value || '').trim();
 
     if (!raw) {
       if (status) status.textContent = 'Please enter your gallery name (it\'s in your email).';
-      form.elements['gallery-name'].focus();
+      nameField.focus();
       return;
     }
 
-    // Turn what they typed into a clean URL slug: lowercase, spaces -> nothing,
-    // strip anything that isn't a letter/number/hyphen, drop stray slashes.
-    var slug = raw.toLowerCase()
-      .replace(/\s+/g, '')
-      .replace(/[^a-z0-9-]/g, '');
-
+    var slug = slugify(raw);
     if (!slug) {
       if (status) status.textContent = 'That gallery name doesn\'t look right. Please check your email and try again.';
+      nameField.focus();
+      nameField.select();
       return;
     }
 
-    if (status) status.textContent = 'Taking you to your gallery\u2026';
-    if (btn) { btn.disabled = true; btn.textContent = 'Opening\u2026'; }
+    // STEP 1 — confirm the name before leaving the site, so a typo is caught here.
+    if (!confirmed) {
+      confirmed = true;
+      if (status) status.textContent = 'Taking you to the \u201C' + slug + '\u201D gallery. Not your gallery? Edit the name above, or click again to continue.';
+      if (btn) btn.textContent = 'Continue to my gallery \u2192';
+      return;
+    }
 
-    // Send them to their Pixieset gallery (Pixieset will confirm the password).
+    // STEP 2 — they confirmed; send them to Pixieset (which checks the password).
+    if (status) status.textContent = 'Opening your gallery\u2026';
+    if (btn) { btn.disabled = true; btn.textContent = 'Opening\u2026'; }
     window.location.href = PIXIESET_BASE + slug + '/';
   });
 })();
