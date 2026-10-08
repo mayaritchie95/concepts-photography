@@ -31,12 +31,33 @@
     <div class="wrap">
       <span class="label">Private client galleries</span>
       <h1 class="display-md" style="font-size: clamp(2rem, 5.5vw, 4.2rem);">Client Gallery.</h1>
-      <p class="lead">Your images are kept in a private, view-only gallery. Enter the code from your email to view your portraits and choose your favourites.</p>
+      <p class="lead">Your images are kept in a private, view-only gallery. Sign in below with the details from your email to view your portraits and choose your favourites.</p>
     </div>
   </div>
 
-  <!-- LOGIN (hidden once a valid code is entered) -->
-  <section id="gallery-login-section">
+  <!-- PIXIESET EMBED (primary). To change the gallery shown, edit the iframe src below.
+       Set it to Karee's Pixieset client-gallery entry so she manages galleries in Pixieset
+       (no site edits needed per client). The fallback link appears if Pixieset blocks framing. -->
+  <section class="pixieset-embed">
+    <div class="wrap-wide">
+      <div class="pxs-frame">
+        <iframe
+          id="pixieset-iframe"
+          src="https://conceptsphotographydesigninc.pixieset.com/"
+          title="CONCEPTS Photography client galleries"
+          loading="lazy"
+          allowfullscreen></iframe>
+      </div>
+      <p class="pxs-fallback form-note">
+        Having trouble viewing your gallery here?
+        <a href="https://conceptsphotographydesigninc.pixieset.com/" target="_blank" rel="noopener">Open your gallery in a new tab &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- DEMO MOCK (hidden now that Pixieset is embedded above; kept as a reference/fallback).
+       To show the built-in demo instead of Pixieset, remove hidden here and the pixieset-embed section. -->
+  <section id="gallery-login-section" hidden>
     <div class="wrap gallery-login">
       <div class="gallery-copy">
         <span class="label">Returning client</span>
