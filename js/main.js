@@ -88,24 +88,53 @@
     .catch(function () { build(null); });
 })();
 
-/* ---- Contact form -> mailto ---- */
+/* ---- Contact form -> Formspree (AJAX, stays on page) ---- */
 (function () {
   var form = document.getElementById('contact-form');
   if (!form) return;
+  var status = document.getElementById('form-status');
+  var btn = form.querySelector('button[type="submit"]');
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var get = function (n) { var el = form.elements[n]; return el ? el.value.trim() : ''; };
-    var name = get('name'), email = get('email'), phone = get('phone'),
-        type = get('project_type'), location = get('location'),
-        timeframe = get('timeframe'), message = get('message');
-    var subject = 'Website inquiry' + (type ? ' \u2014 ' + type : '') + (name ? ' from ' + name : '');
-    var body = ['Name: ' + name, 'Email: ' + email, 'Phone: ' + phone,
-      'Project type: ' + type, 'Preferred location: ' + location,
-      'Timeframe: ' + timeframe, '', 'Message:', message].join('\n');
-    window.location.href = 'mailto:kareedavidson@sasktel.net?subject=' +
-      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    var note = document.getElementById('form-status');
-    if (note) note.textContent = 'Opening your email app to send this to Karee. If nothing happens, email kareedavidson@sasktel.net directly.';
+
+    // Simple required-field check (name, email, project type, message)
+    var required = ['name', 'email', 'project_type', 'message'];
+    for (var i = 0; i < required.length; i++) {
+      var el = form.elements[required[i]];
+      if (el && !el.value.trim()) {
+        if (status) { status.style.color = ''; status.textContent = 'Please fill in your name, email, what you\u2019re looking for, and a message.'; }
+        el.focus();
+        return;
+      }
+    }
+
+    var action = form.getAttribute('action');
+    var data = new FormData(form);
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending\u2026'; }
+    if (status) { status.style.color = ''; status.textContent = ''; }
+
+    fetch(action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (res.ok) {
+        form.reset();
+        if (status) status.textContent = 'Thank you \u2014 your inquiry has been sent. Karee will get back to you by email.';
+        if (btn) btn.textContent = 'Sent \u2713';
+      } else {
+        return res.json().then(function (d) {
+          var msg = (d && d.errors && d.errors.length) ? d.errors.map(function (x){return x.message;}).join(', ')
+            : 'Something went wrong sending your message.';
+          throw new Error(msg);
+        });
+      }
+    }).catch(function (err) {
+      if (status) status.textContent = (err && err.message ? err.message + ' ' : '') +
+        'Please try again, or email kareedavidson@sasktel.net directly.';
+      if (btn) { btn.disabled = false; btn.textContent = 'Send inquiry'; }
+    });
   });
 })();
 

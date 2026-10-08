@@ -48,7 +48,7 @@
       </div>
       <div>
         <span class="label">Send an inquiry</span>
-        <form id="contact-form" novalidate style="margin-top:8px;">
+        <form id="contact-form" action="https://formspree.io/f/xdeagzaq" method="POST" style="margin-top:8px;">
           <label for="name">Name <span class="required">*</span></label>
           <input type="text" id="name" name="name" required autocomplete="name">
           <label for="email">Email <span class="required">*</span></label>
@@ -73,9 +73,13 @@
           <input type="text" id="timeframe" name="timeframe" placeholder="e.g. within a month, flexible">
           <label for="message">Tell me about the project <span class="required">*</span></label>
           <textarea id="message" name="message" required></textarea>
+          <!-- Formspree: set a tidy email subject -->
+          <input type="hidden" name="_subject" value="New website inquiry — Concepts Photography">
+          <!-- Honeypot anti-spam field (hidden from people, bots fill it) -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
           <button type="submit" class="btn-solid">Send inquiry</button>
           <p id="form-status" class="form-note" aria-live="polite"></p>
-          <p class="form-note">This form opens your email app with the details filled in, addressed to Karee. Prefer to write directly? Email <a href="mailto:kareedavidson@sasktel.net">kareedavidson@sasktel.net</a>.</p>
+          <p class="form-note">I read every message and will reply by email. Prefer to write directly? Email <a href="mailto:kareedavidson@sasktel.net">kareedavidson@sasktel.net</a>.</p>
         </form>
       </div>
     </div>
