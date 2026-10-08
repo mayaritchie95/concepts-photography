@@ -148,14 +148,102 @@
   start();
 })();
 
-/* ---- Gallery login (mock) ---- */
+/* ---- Client gallery: login -> view-only gallery + lightbox (demo) ----
+   NOTE: this is a front-end demo. The access code is checked in the browser,
+   which is fine for a preview but is NOT real security — a secure, per-client
+   gallery service is connected before launch. */
 (function () {
   var form = document.getElementById('gallery-form');
   if (!form) return;
+
+  // Demo galleries: code -> { name, count }. Images live in images/gallery-demo/proof-NN.jpg
+  var DEMO = {
+    'SMITH2027': { name: 'Smith Leadership Team', count: 12 }
+  };
+
+  var loginSection = document.getElementById('gallery-login-section');
+  var viewSection  = document.getElementById('gallery-view');
+  var grid         = document.getElementById('proof-grid');
+  var clientNameEl = document.getElementById('gallery-client-name');
+  var status       = document.getElementById('gallery-status');
+  var signout      = document.getElementById('gallery-signout');
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function openGallery(gal) {
+    clientNameEl.textContent = gal.name;
+    grid.innerHTML = '';
+    for (var i = 1; i <= gal.count; i++) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'proof-cell';
+      btn.setAttribute('data-index', i);
+      var img = document.createElement('img');
+      img.src = 'images/gallery-demo/proof-' + pad(i) + '.jpg';
+      img.alt = gal.name + ' — proof ' + i;
+      img.setAttribute('draggable', 'false');
+      img.loading = 'lazy';
+      var num = document.createElement('span');
+      num.className = 'pnum';
+      num.textContent = pad(i);
+      btn.appendChild(img);
+      btn.appendChild(num);
+      btn.addEventListener('click', (function (idx) { return function () { openLightbox(idx, gal.count); }; })(i));
+      grid.appendChild(btn);
+    }
+    loginSection.hidden = true;
+    viewSection.hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var status = document.getElementById('gallery-status');
-    if (status) status.textContent = 'This is a preview. Secure client galleries will be connected before launch — for now, email Karee for your images.';
+    var code = (form.elements['gallery-code'].value || '').trim().toUpperCase();
+    var gal = DEMO[code];
+    if (gal) {
+      if (status) status.textContent = '';
+      openGallery(gal);
+    } else {
+      if (status) status.textContent = "That code isn't right. Check the code from your email, or get in touch and Karee will resend it.";
+    }
+  });
+
+  if (signout) signout.addEventListener('click', function () {
+    viewSection.hidden = true;
+    loginSection.hidden = false;
+    form.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---- Lightbox ---- */
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  var lbImg = document.getElementById('lb-img');
+  var lbNum = lb.querySelector('.lb-num');
+  var cur = 1, total = 0;
+
+  function show(i) {
+    cur = i;
+    lbImg.src = 'images/gallery-demo/proof-' + pad(i) + '.jpg';
+    lbNum.textContent = pad(i) + ' / ' + pad(total);
+  }
+  function openLightbox(i, count) {
+    total = count; show(i); lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() { lb.hidden = true; document.body.style.overflow = ''; }
+  function next() { show(cur % total + 1); }
+  function prev() { show((cur - 2 + total) % total + 1); }
+
+  lb.querySelector('.lb-close').addEventListener('click', closeLightbox);
+  lb.querySelector('.lb-next').addEventListener('click', next);
+  lb.querySelector('.lb-prev').addEventListener('click', prev);
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'ArrowLeft') prev();
   });
 })();
 
@@ -179,6 +267,12 @@
     img.setAttribute('draggable', 'false');
     img.style.webkitTouchCallout = 'none';
     img.style.userSelect = 'none';
+  });
+  // Block the common "save page/image" keyboard shortcut (Ctrl/Cmd+S)
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+    }
   });
 })();
 

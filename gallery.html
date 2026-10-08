@@ -31,11 +31,12 @@
     <div class="wrap">
       <span class="label">Private client galleries</span>
       <h1 class="display-md" style="font-size: clamp(2rem, 5.5vw, 4.2rem);">Client Gallery.</h1>
-      <p class="lead">Your images are kept in a private gallery. Enter the code from your email to view, download, and choose your favourites.</p>
+      <p class="lead">Your images are kept in a private, view-only gallery. Enter the code from your email to view your portraits and choose your favourites.</p>
     </div>
   </div>
 
-  <section>
+  <!-- LOGIN (hidden once a valid code is entered) -->
+  <section id="gallery-login-section">
     <div class="wrap gallery-login">
       <div class="gallery-copy">
         <span class="label">Returning client</span>
@@ -51,11 +52,35 @@
           <input type="password" id="gallery-code" name="gallery-code" autocomplete="off" placeholder="Enter your code">
           <button type="submit" class="btn-solid">View my gallery</button>
           <p id="gallery-status" class="form-note" aria-live="polite"></p>
-          <p class="form-note">This is a preview of the client gallery sign-in. Secure galleries will be connected before launch.</p>
+          <p class="form-note">Preview demo &mdash; try the sample code <strong>SMITH2027</strong> to see a client gallery. Secure, per-client galleries will be connected before launch.</p>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- GALLERY (revealed after valid code) -->
+  <section id="gallery-view" hidden>
+    <div class="wrap-wide">
+      <div class="gallery-view-head">
+        <div>
+          <span class="label">Your gallery</span>
+          <p class="display-md" id="gallery-client-name" style="margin-top:14px;">Smith Leadership Team</p>
+          <p class="section-desc" style="margin-top:12px;">View-only proofs. Note the numbers of your favourites and send them to Karee &mdash; she&rsquo;ll retouch and deliver your final high-resolution files.</p>
+        </div>
+        <button type="button" id="gallery-signout" class="btn">Sign out</button>
+      </div>
+      <div class="proof-grid" id="proof-grid" oncontextmenu="return false;"></div>
+      <p class="form-note" style="margin-top:clamp(28px,4vw,44px);text-align:center;">These images are the property of CONCEPTS Photography &amp; Design Inc. and are for your viewing only.</p>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" hidden oncontextmenu="return false;">
+    <button type="button" class="lb-close" aria-label="Close">&times;</button>
+    <button type="button" class="lb-prev" aria-label="Previous">&#8249;</button>
+    <div class="lb-stage"><img id="lb-img" src="" alt="" draggable="false"><span class="lb-num"></span></div>
+    <button type="button" class="lb-next" aria-label="Next">&#8250;</button>
+  </div>
 </main>
 <footer class="site-footer">
   <div class="wrap-wide">
