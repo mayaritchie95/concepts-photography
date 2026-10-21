@@ -172,7 +172,7 @@ section { padding: clamp(64px, 11vw, 150px) 0; }
 .section-head { display: grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,60px); align-items: start; margin-bottom: clamp(36px, 5vw, 70px); }
 .section-head .label { padding-top: 8px; }
 
-.about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px, 6vw, 100px); align-items: end; }
+.about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px, 6vw, 100px); align-items: start; }
 .about-grid .figure { position: relative; }
 .about-grid .figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
 .about-grid .figure .index-num { position:absolute; top:-26px; left:0; }
@@ -227,7 +227,7 @@ section { padding: clamp(64px, 11vw, 150px) 0; }
 .pullquote cite { display:block; margin-top: 28px; font-style: normal; }
 .quote-two { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,90px); }
 .quote-two blockquote { max-width: none; }
-.quote-two .q { font-size: clamp(1.1rem, 2vw, 1.55rem); }
+.quote-two .q { font-size: clamp(1rem, 1.6vw, 1.3rem); line-height: 1.35; }
 @media (max-width:860px){ .quote-two{ grid-template-columns:1fr; gap:48px; } }
 
 .statement { text-align: left; padding-top: clamp(16px, 2.5vw, 32px); }
@@ -301,7 +301,7 @@ form .btn-solid { margin-top: 32px; }
 /* Kind words grid (About) */
 .kind-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,5vw,64px) clamp(40px,6vw,90px); }
 .kind-grid blockquote { margin:0; max-width:none; }
-.kind-grid .q { font-size:clamp(1.15rem,2vw,1.6rem); line-height:1.25; }
+.kind-grid .q { font-size:clamp(1rem,1.6vw,1.3rem); line-height:1.4; }
 .kind-grid cite { display:block; margin-top:18px; font-style:normal; }
 @media (max-width:860px){ .kind-grid{ grid-template-columns:1fr; gap:40px; } }
 
