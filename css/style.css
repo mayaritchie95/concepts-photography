@@ -227,10 +227,10 @@ section { padding: clamp(64px, 11vw, 150px) 0; }
 .pullquote cite { display:block; margin-top: 28px; font-style: normal; }
 .quote-two { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,90px); }
 .quote-two blockquote { max-width: none; }
-.quote-two .q { font-size: clamp(1.3rem, 2.6vw, 2rem); }
+.quote-two .q { font-size: clamp(1.1rem, 2vw, 1.55rem); }
 @media (max-width:860px){ .quote-two{ grid-template-columns:1fr; gap:48px; } }
 
-.statement { text-align: left; }
+.statement { text-align: left; padding-top: clamp(28px, 5vw, 64px); }
 .statement .display { max-width: 14ch; }
 .statement .row { display:flex; align-items:center; gap: 32px; flex-wrap: wrap; margin-top: clamp(30px,4vw,50px); }
 
@@ -356,9 +356,11 @@ form .btn-solid { margin-top: 32px; }
 .section-nav a { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); padding-bottom: 3px; border-bottom: 1px solid transparent; }
 .section-nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .pf-section { padding: clamp(56px,8vw,110px) 0; scroll-margin-top: 90px; }
+.pf-section .section-head { margin-bottom: clamp(16px, 2vw, 24px); }
 .pf-section + .pf-section { padding-top: 0; }
 
 /* Gallery login */
+.gallery-login-section { padding-top: clamp(28px, 4vw, 52px); }
 .gallery-login { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,90px); align-items:center; }
 .gallery-form-wrap { border-left: 1px solid var(--hairline); padding-left: clamp(30px,5vw,70px); }
 @media (max-width: 860px) {
@@ -434,6 +436,7 @@ form .btn-solid { margin-top: 32px; }
 .pf-intro-inner { display:grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,60px); align-items: start; }
 .pf-intro .label { padding-top: 6px; }
 .pf-intro p { max-width: 72ch; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.6; color: #2a2a2a; margin: 0; }
+.pf-intro p.pf-intro-small { font-size: 0.72rem; line-height: 1.75; letter-spacing: 0.01em; max-width: 60ch; }
 .pf-intro cite { display:block; margin-top: 16px; font-style: normal; font-size: 0.82rem; letter-spacing: 0.08em; color: var(--grey); }
 @media (max-width: 860px){ .pf-intro-inner { grid-template-columns: 1fr; gap: 14px; } }
 
