@@ -230,7 +230,7 @@ section { padding: clamp(64px, 11vw, 150px) 0; }
 .quote-two .q { font-size: clamp(1.1rem, 2vw, 1.55rem); }
 @media (max-width:860px){ .quote-two{ grid-template-columns:1fr; gap:48px; } }
 
-.statement { text-align: left; padding-top: clamp(28px, 5vw, 64px); }
+.statement { text-align: left; padding-top: clamp(16px, 2.5vw, 32px); }
 .statement .display { max-width: 14ch; }
 .statement .row { display:flex; align-items:center; gap: 32px; flex-wrap: wrap; margin-top: clamp(30px,4vw,50px); }
 
@@ -369,7 +369,7 @@ form .btn-solid { margin-top: 32px; }
 }
 
 /* Homepage explore section — invites visitors deeper into the site */
-.explore { padding: clamp(56px,8vw,110px) 0; border-top: 1px solid var(--hairline); }
+.explore { padding: clamp(56px,8vw,110px) 0 clamp(20px,3vw,36px); border-top: 1px solid var(--hairline); }
 .explore .label { display:block; margin-bottom: clamp(30px,4vw,52px); }
 .explore-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 0; }
 .explore-item {
