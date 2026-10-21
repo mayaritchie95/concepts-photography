@@ -436,7 +436,7 @@ form .btn-solid { margin-top: 32px; }
 .pf-intro-inner { display:grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,60px); align-items: start; }
 .pf-intro .label { padding-top: 6px; }
 .pf-intro p { max-width: 72ch; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.6; color: #2a2a2a; margin: 0; }
-.pf-intro p.pf-intro-small { font-size: 0.72rem; line-height: 1.75; letter-spacing: 0.01em; max-width: 60ch; }
+.pf-intro p.pf-intro-small { font-size: 0.72rem; line-height: 1.75; letter-spacing: 0.01em; max-width: none; }
 .pf-intro cite { display:block; margin-top: 16px; font-style: normal; font-size: 0.82rem; letter-spacing: 0.08em; color: var(--grey); }
 @media (max-width: 860px){ .pf-intro-inner { grid-template-columns: 1fr; gap: 14px; } }
 
